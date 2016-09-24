@@ -34,11 +34,13 @@ source files if these have a git commit from the current year.
 
 For example a file changed in 2015 (with 2015 being the current year):
 
-```// Copyright (c) 2009-2013 The Litecoin Core developers```
+```// Copyright (c) 2009-2013 The Bitcoin Core developers
+// Copyright (c) 2016 The Litecoin Core developers```
 
 would be changed to:
 
-```// Copyright (c) 2009-2015 The Litecoin Core developers```
+```// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2016 The Litecoin Core developers```
 
 git-subtree-check.sh
 ====================
