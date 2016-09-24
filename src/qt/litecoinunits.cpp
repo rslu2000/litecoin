@@ -18,9 +18,9 @@ LitecoinUnits::LitecoinUnits(QObject *parent):
 QList<LitecoinUnits::Unit> LitecoinUnits::availableUnits()
 {
     QList<LitecoinUnits::Unit> unitlist;
-    unitlist.append(BTC);
-    unitlist.append(mBTC);
-    unitlist.append(uBTC);
+    unitlist.append(LTC);
+    unitlist.append(mLTC);
+    unitlist.append(uLTC);
     return unitlist;
 }
 
@@ -28,9 +28,9 @@ bool LitecoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTC:
-    case mBTC:
-    case uBTC:
+    case LTC:
+    case mLTC:
+    case uLTC:
         return true;
     default:
         return false;
@@ -41,9 +41,9 @@ QString LitecoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("BTC");
-    case mBTC: return QString("mBTC");
-    case uBTC: return QString::fromUtf8("μBTC");
+    case LTC: return QString("LTC");
+    case mLTC: return QString("mLTC");
+    case uLTC: return QString::fromUtf8("μLTC");
     default: return QString("???");
     }
 }
@@ -52,9 +52,9 @@ QString LitecoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Litecoins");
-    case mBTC: return QString("Milli-Litecoins (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Micro-Litecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case LTC: return QString("Litecoins");
+    case mLTC: return QString("Milli-Litecoins (1 / 1" THIN_SP_UTF8 "000)");
+    case uLTC: return QString("Micro-Litecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
@@ -63,9 +63,9 @@ qint64 LitecoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTC:  return 100000000;
-    case mBTC: return 100000;
-    case uBTC: return 100;
+    case LTC:  return 100000000;
+    case mLTC: return 100000;
+    case uLTC: return 100;
     default:   return 100000000;
     }
 }
@@ -74,9 +74,9 @@ int LitecoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8;
-    case mBTC: return 5;
-    case uBTC: return 2;
+    case LTC: return 8;
+    case mLTC: return 5;
+    case uLTC: return 2;
     default: return 0;
     }
 }

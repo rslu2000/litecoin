@@ -192,7 +192,7 @@ bool parseLitecoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!LitecoinUnits::parse(LitecoinUnits::BTC, i->second, &rv.amount))
+                if(!LitecoinUnits::parse(LitecoinUnits::LTC, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -231,7 +231,7 @@ QString formatLitecoinURI(const SendCoinsRecipient &info)
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(LitecoinUnits::format(LitecoinUnits::BTC, info.amount, false, LitecoinUnits::separatorNever));
+        ret += QString("?amount=%1").arg(LitecoinUnits::format(LitecoinUnits::LTC, info.amount, false, LitecoinUnits::separatorNever));
         paramCount++;
     }
 

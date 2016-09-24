@@ -443,10 +443,10 @@ Then when building, override the remote URLs that gbuild would otherwise pull fr
 cd /some/root/path/
 git clone https://github.com/litecoin-core/litecoin-detached-sigs.git
 
-BTCPATH=/some/root/path/litecoin
+LTCPATH=/some/root/path/litecoin
 SIGPATH=/some/root/path/litecoin-detached-sigs
 
-./bin/gbuild --url litecoin=${BTCPATH},signature=${SIGPATH} ../litecoin/contrib/gitian-descriptors/gitian-win-signer.yml
+./bin/gbuild --url litecoin=${LTCPATH},signature=${SIGPATH} ../litecoin/contrib/gitian-descriptors/gitian-win-signer.yml
 ```
 
 Signing externally
