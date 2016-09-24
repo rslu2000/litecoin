@@ -239,7 +239,9 @@ crypto_liblitecoin_crypto_a_SOURCES = \
   crypto/sha256.cpp \
   crypto/sha256.h \
   crypto/sha512.cpp \
-  crypto/sha512.h
+  crypto/sha512.h \
+  crypto/scrypt.cpp \
+  crypto/scrypt.h 
 
 # consensus: shared between all executables that validate any consensus rules.
 liblitecoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(LITECOIN_INCLUDES)
@@ -407,7 +409,7 @@ if GLIBC_BACK_COMPAT
 endif
 
 liblitecoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-liblitecoinconsensus_la_LIBADD = $(LIBSECP256K1)
+liblitecoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS) 
 liblitecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_LITECOIN_INTERNAL
 liblitecoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
