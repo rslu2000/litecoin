@@ -409,7 +409,7 @@ if GLIBC_BACK_COMPAT
 endif
 
 liblitecoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-liblitecoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS) 
+liblitecoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS)  $(LIBLITECOIN_CRYPTO)
 liblitecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_LITECOIN_INTERNAL
 liblitecoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
