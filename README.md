@@ -15,8 +15,7 @@ out collectively by the network. Litecoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Litecoin Core software, see https://litecoin.org/en/download, or read the
-[original whitepaper](https://litecoincore.org/litecoin.pdf).
+the Litecoin Core software, see https://litecoin.org.
 
 License
 -------
@@ -32,10 +31,6 @@ completely stable. [Tags](https://github.com/wangxinxi/litecoin/tags) are create
 regularly to indicate new official, stable release versions of Litecoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
-
-The developer [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/litecoin-dev)
-should be used to discuss complicated or controversial changes before working
-on a patch set.
 
 Developer IRC can be found on Freenode at #litecoin-core-dev.
 
@@ -77,5 +72,3 @@ Translations are periodically pulled from Transifex and merged into the git repo
 
 **Important**: We do not accept translation changes as GitHub pull requests because the next
 pull from Transifex would automatically overwrite them again.
-
-Translators should also subscribe to the [mailing list](https://groups.google.com/forum/#!forum/litecoin-translators).
