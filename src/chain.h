@@ -393,6 +393,11 @@ public:
         return block.GetHash();
     }
 
+    uint256 GetBlockPoWHash() const
+    {
+        return GetBlockHeader().GetPoWHash();
+    }    
+
 
     std::string ToString() const
     {
