@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2016 The Litecoin Core developers
+// Copyright (c) 2012-2016 The Litecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -3525,24 +3525,33 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     if (block.GetBlockTime() > nAdjustedTime + 2 * 60 * 60)
         return state.Invalid(false, REJECT_INVALID, "time-too-new", "block timestamp too far in the future");
 
+    
+    // Litecoin: Reject block.nVersion=1 blocks (mainnet >= 710000, testnet >= 400000, regtest uses supermajority)
+    const int nHeight = pindexPrev->nHeight+1;    
+    bool enforceV2 = false;
+    if (block.nVersion < 2) {
+        if (consensusParams.BIP34Height != -1) {
+            // Mainnet 710k, Testnet 400k
+            if (nHeight >= consensusParams.BIP34Height)
+                enforceV2 = true;
+        }
+        else {
+            // Regtest and Unittest: use Bitcoin's supermajority rule
+            if (IsSuperMajority(2, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
+                enforceV2 = true;
+        }
+    }
+
+    if (enforceV2) {
+        return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
+                             strprintf("rejected nVersion=0x%08x block", block.nVersion));
+    }
+
     // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
-    // check for version 2, 3 and 4 upgrades
-    //const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
-    //if(block.nVersion < 2 && nHeight >= consensusParams.BIP34Height)
-    //    return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
-    //          strprintf("rejected nVersion=0x%08x block", block.nVersion));
-
-    //// Reject block.nVersion=2 blocks when 95% (75% on testnet) of the network has upgraded:
-    //if (block.nVersion < 3 && IsSuperMajority(3, pindexPrev, consensusParams.RejectBlockOutdatedMajority(), consensusParams.ToCheckBlockUpgradeMajority()))
-    //{
-    //   return state.Invalid(error("%s : rejected nVersion=2 block", __func__),
-    //                        REJECT_OBSOLETE, "bad-version");
-    //}
-
-    //// Reject block.nVersion=3 blocks when 95% (75% on testnet) of the network has upgraded:
-    //if (block.nVersion < 4 && IsSuperMajority(4, pindexPrev, consensusParams.RejectBlockOutdatedMajority(), consensusParams.ToCheckBlockUpgradeMajority()))
-    //  return state.Invalid(error("%s : rejected nVersion=3 block", __func__),
-    //          REJECT_OBSOLETE, "bad-version");
+    for (int32_t version = 3; version < 5; ++version) // check for version 2, 3 and 4 upgrades
+        if (block.nVersion < version && IsSuperMajority(version, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
+            return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", version - 1),
+                                 strprintf("rejected nVersion=0x%08x block", version - 1));
 
     return true;
 }
