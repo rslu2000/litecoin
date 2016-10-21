@@ -222,7 +222,7 @@ liblitecoin_wallet_a_SOURCES = \
   $(LITECOIN_CORE_H)
 
 # crypto primitives library
-crypto_liblitecoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(LITECOIN_CONFIG_INCLUDES)
+crypto_liblitecoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(LITECOIN_CONFIG_INCLUDES) $(SSL_CFLAGS)
 crypto_liblitecoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 crypto_liblitecoin_crypto_a_SOURCES = \
   crypto/aes.cpp \
@@ -410,7 +410,7 @@ endif
 
 liblitecoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
 liblitecoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS)  $(LIBLITECOIN_CRYPTO)
-liblitecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_LITECOIN_INTERNAL
+liblitecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_LITECOIN_INTERNAL $(SSL_CFLAGS)
 liblitecoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
